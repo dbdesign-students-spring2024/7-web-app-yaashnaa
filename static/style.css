@@ -1,0 +1,546 @@
+:ROOT{
+  --text: rgb(15, 10, 17);
+  --background: rgb(254, 251, 255);
+  --primary: rgb(150, 109, 171);
+  --secondary: rgb(208, 173, 182);
+  --accent: rgb(246, 193, 199);
+  
+}
+
+body{
+    color: var(--text);
+    background-color: var(--background);
+    /* position: relative; */
+    height: 100vh;
+    width: 100vw;
+}
+
+h1{
+    font-family: "M PLUS 1 Code", monospace;
+    text-align: center;
+}
+.navbar {
+  position: absolute;
+  font-family: "M PLUS 1 Code", monospace;
+  top: 0;
+    background-color:rgb(246, 193, 199, 70%);
+    padding: .6rem;
+    margin: 0;
+    width: 100vw;
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    align-items: center;
+  
+  }
+  
+  .navbar .logo a {
+    font-size: 1.7rem;
+    text-decoration: none;
+    color: #333;
+    margin-left: 2rem;
+    font-family: "Platypi", serif;
+  }
+  
+  .navbar .nav-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+  }
+  
+  .navbar .nav-links ul li {
+    display: inline;
+    margin-left: 20px;
+  }
+  
+  .navbar .nav-links ul li a {
+    text-decoration: none;
+    color: #333;
+    margin-right: 2rem;
+  }
+  .seven h1 {
+    text-align: center;
+        font-size:5rem; font-weight:300; color:var(text); letter-spacing:1px;
+        text-transform: uppercase;
+    
+        display: grid;
+        grid-template-columns: 1fr max-content 1fr;
+        grid-template-rows: 27px 0;
+        grid-gap: 20px;
+        align-items: center;
+      
+    }
+    
+    .seven h1:after,.seven h1:before {
+        content: " ";
+        display: block;
+        border-bottom: 1px solid var(--primary);
+        border-top: 1px solid var(--primary);
+        height: 5px;
+      background-color:var(--primary);
+    }
+    
+    .welcome{
+        text-align: center;
+        font-size: 4rem;
+        font-family: "M PLUS 1 Code", monospace;
+       
+
+    }
+    .seven{
+      margin-top: 8rem;
+    }
+
+
+/* CSS */
+.button-78 {
+  align-items: center;
+  appearance: none;
+  background-clip: padding-box;
+  background-color: initial;
+  background-image: none;
+  border-style: none;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  flex-direction: row;
+  flex-shrink: 0;
+  font-family: Eina01,sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  justify-content: center;
+  line-height: 24px;
+  margin: 0;
+  min-height: 64px;
+  outline: none;
+  overflow: visible;
+  padding: 19px 26px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: auto;
+  word-break: keep-all;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .button-78 {
+    padding: 19px 32px;
+  }
+}
+
+.button-78:before,
+.button-78:after {
+  border-radius: 80px;
+}
+
+.button-78:before {
+  background-image: linear-gradient(92.83deg, var(--accent) 0, var(--secondary) 100%);
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -2;
+}
+
+.button-78:after {
+  background-color: initial;
+  background-image: linear-gradient(var(--accent) 0, var(--secondary) 100%);
+  bottom: 4px;
+  content: "";
+  display: block;
+  left: 4px;
+  overflow: hidden;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  transition: all 100ms ease-out;
+  z-index: -1;
+}
+
+.button-78:hover:not(:disabled):before {
+  background: linear-gradient(92.83deg, var(--primary) 0%, var(--accent) 100%);
+}
+
+.button-78:hover:not(:disabled):after {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  transition-timing-function: ease-in;
+  opacity: 0;
+}
+
+.button-78:active:not(:disabled) {
+  color: #ccc;
+}
+
+.button-78:active:not(:disabled):before {
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(92.83deg, #ff7426 0, #f93a13 100%);
+}
+
+.button-78:active:not(:disabled):after {
+  background-image: linear-gradient(#541a0f 0, #0c0d0d 100%);
+  bottom: 4px;
+  left: 4px;
+  right: 4px;
+  top: 4px;
+}
+
+.button-78:disabled {
+  cursor: default;
+  opacity: .24;
+}
+
+.buttons{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1.2rem;
+}
+
+.form-workout{
+    border: var(--accent) solid 1px;
+    border-radius: 10px;
+    /* background-color: rgb(208, 173, 182,70%); */
+    margin: 1.5rem;
+    height: fit-content;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    flex: 1;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+input{
+    width: 100%;
+    height: 1.2rem;
+    margin: .3rem;
+    padding: .3rem;
+    box-shadow: rgba(150, 109, 171, 0.27) 0px 0px 0.25em, rgba(150, 109, 171, 0.05) 0px 0.25em 1em;
+}
+
+.row workout-item{
+    display: inline;
+}
+
+.read-text{
+    font-family: "Platypi", serif;
+    font-size: 1.4rem;
+}
+.read-text-1{
+    font-family: "Platypi", serif;
+    font-size: 1.2rem;
+
+}
+
+.read-text-data{
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    font-family: "M PLUS 1 Code", monospace;
+}
+.read-text-data-name{
+    text-transform: capitalize;
+    font-size: 1.2rem;
+    font-family: "M PLUS 1 Code", monospace;
+}
+
+.exercise-info{
+    margin-left: 2rem;
+}
+.exercise-info-1{
+    margin-left: 3rem;
+    font-weight: 200;
+    font-family: "M PLUS 1 Code", monospace;
+
+}
+
+.index-text{
+  text-align: center;
+  font-family: "M PLUS 1 Code", monospace;
+}
+
+.nav-links li:hover{
+  text-decoration: underline black solid;
+}
+
+.fa-solid fa-xmark{
+  background-color: var(--background);
+  border: none;
+}
+
+.actions{
+  background-color: var(--background);
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0; 
+  margin: 1rem;
+}
+form button{
+  background-color: var(--background);
+  border: none;
+  cursor: pointer;
+
+}
+
+.edit-link{
+  text-decoration: none;
+  color: black;
+  font-family: "M PLUS 1 Code", monospace;
+
+}
+
+form button:hover{
+  transform: scale(1);
+}
+
+.container-read{
+  position: relative;
+  padding: 2rem;
+  margin-left: 1.5rem;
+  width: 80vh;
+  border: 2px var(--primary) dashed;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+}
+
+.main-cont{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+ 
+
+.buttons input{
+  width: fit-content;
+  background:none;
+  height: 0;
+  width: 0;
+  border: none;
+  margin: 0;
+  display: none;
+}
+
+.buttons a{
+  text-decoration: none;
+  color: black;
+}
+
+
+
+.login-box {
+  position: absolute;
+  font-family: "M PLUS 1 Code", monospace;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background-color: var(--background);
+  /* background:rgb(188, 142, 139, 40%) ; */
+  /* opacity: 50%; */
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+  color: black;
+  border: 2px solid var(--accent);
+}
+
+.login-box h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: black;
+  text-align: center;
+  font-family: "Platypi", serif;
+}
+
+.login-box .user-box {
+  position: relative;
+}
+
+.login-box .user-box input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: black;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  background: transparent;
+}
+.login-box .user-box label {
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: black;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: var(--primary);
+  font-size: 1.2rempx;
+}
+
+.login-box form .form-btn  {
+  position: relative;
+  display: inline-block;
+
+  color: black;
+  font-size: 16px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  transition: .5s;
+  margin-top: 40px;
+  letter-spacing: 4px
+}
+
+.login-box .form-btn :hover {
+  background: rgb(150, 109, 171,70%);
+  color: black;
+  border-radius: 10px;
+  box-shadow: 0 0 5px var(--primary),
+              0 0 25px var(--primary),
+              0 0 50px var(--primary),
+              0 0 100px var(--primary);
+}
+
+.login-box .form-btn  span {
+  position: absolute;
+  display: block;
+}
+
+.login-box .form-btn  span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--primary));
+  animation: btn-anim1 1s linear infinite;
+}
+
+@keyframes btn-anim1 {
+  0% {
+    left: -100%;
+  }
+  50%,100% {
+    left: 100%;
+  }
+}
+
+.login-box .form-btn  span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--primary));
+  animation: btn-anim2 1s linear infinite;
+  animation-delay: .25s
+}
+
+@keyframes btn-anim2 {
+  0% {
+    top: -100%;
+  }
+  50%,100% {
+    top: 100%;
+  }
+}
+
+.login-box .form-btn  span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent,var(--primary) );
+  animation: btn-anim3 1s linear infinite;
+  animation-delay: .5s
+}
+
+@keyframes btn-anim3 {
+  0% {
+    right: -100%;
+  }
+  50%,100% {
+    right: 100%;
+  }
+}
+
+.login-box .form-btn  span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, var(--primary));
+  animation: btn-anim4 1s linear infinite;
+  animation-delay: .75s
+}
+
+@keyframes btn-anim4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,100% {
+    bottom: 100%;
+  }
+}
+
+.login-box .form-btn input{
+  width: fit-content;
+  background-color: var(--background);
+  height: fit-content;
+  text-align: center;
+  border: none;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box .form-btn {
+  text-align: center;
+  color: black;
+}

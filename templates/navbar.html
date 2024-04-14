@@ -2,24 +2,29 @@
 <html>
   <head>
     <title>Flask-MongoDB Example App</title>
-    <script src="https://kit.fontawesome.com/4737a162b6.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Platypi:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
   </head>
   <body>
-    {% include 'navbar.html' %}
-    
-
-     
-        <main>
-          {% block container %}
-  
-          {% endblock %}
-        </main>
-        
+    <div class="navbar">
+        <div class="container">
+          <div class="logo">
+            <a href="#">Trackr</a>
+          </div>
+          <div class="nav-links">
+            <ul>
+              <li><a href="{{ url_for('home') }}">Home</a></li>
+              <li><a href="{{ url_for('read') }}">All Workouts</a></li>
+              <li><a href="{{ url_for('create') }}">Log a workout</a></li>
+              <li><a href="{{ url_for('login') }}">Login/signup</a></li>
+              <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+   
   </body>
 </html>

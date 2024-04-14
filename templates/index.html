@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
 
 {% block container %}
-<h2>Welcome!</h2>
-<p>Welcome to the Flask app. This is the home page. Here are a few links to example pages you might find interesting.
-    <ul>
-        <li><a href="{{ url_for('read')}}">a page that displays information pulled from a MongoDB database collection</a></li>
-        <li><a href="{{ url_for('create')}}">a page with a form you can submit to create a new record in a MongoDB collection</a></li>
-    </ul>
-</p>
+
+
+
+<div class="seven">
+    <h1>Workout Tracker</h1>
+  </div>
+{% if username %}
+        <div class="welcome">Hello, {{ username }}!</div>
+    {% else %}
+        <p class="index-text">You are not logged in. <a href="{{ url_for('login') }}">Login</a> or <a href="{{ url_for('signup') }}">Sign up</a> here.</p>
+    {% endif %}
+    <div class="buttons"> 
+        <a href="{{ url_for('read') }}"> <button class="button-78" role="button">See Workouts</button> </a> 
+        <a href="{{ url_for('create') }}"><button class="button-78" role="button">Log a workout</button> </a> 
+      <button class="button-78" role="button">Explore other Exercises</button>
+      </div>
 {% endblock %}

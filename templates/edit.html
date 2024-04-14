@@ -1,15 +1,32 @@
-{% extends 'base.html' %} {% block container %}
+{% extends 'base.html' %} 
+{% block container %}
 <h2>Update</h2>
 <p>Edit a record in the MongoDB database collection.</p>
-<form method="POST" action="{{ url_for('edit_post', mongoid=mongoid) }}">
+<form method="POST" action="{{ url_for('edit_post', mongoid=doc._id) }}">
   <p>
-    Your name:
-    <input type="text" id="fname" name="fname" value="{{doc.name}}" /><br />
+    Date:
+    <input type="text" id="date" name="date" value="{{ doc.date }}" /><br />
   </p>
-  <p>
-    Message:
-    <textarea id="fmessage" name="fmessage">{{doc.message}}</textarea>
-  </p>
+  {% for workout in doc.workouts %}
+    <p>
+      Body Part:
+      <input type="text" id="body_part" name="body_part" value="{{ workout.body_part }}" /><br />
+    </p>
+    {% for exercise in workout.exercises %}
+      <p>
+        Exercise:
+        <input type="text" id="exercise" name="exercise" value="{{ exercise.name }}" /><br />
+      </p>
+      {% for set in exercise.sets %}
+        <p>
+          Reps:
+          <input type="text" name="reps" value="{{ set.reps }}" />
+          Weight:
+          <input type="text" name="weight" value="{{ set.weight }}" />
+        </p>
+      {% endfor %}
+    {% endfor %}
+  {% endfor %}
   <p>
     <a href="{{ url_for('read')}}">Cancel</a>
     <input type="submit" name="post-btn" value="Save" />

@@ -1,23 +1,49 @@
 {% extends 'base.html' %}
 
 {% block container %}
-<h2>Read</h2>
-<p>This page shows information pulled from a MongoDB database collection.
-        
-    {% for doc in docs %}
-    <div>
-        <hr class="solid">
-        <p class="post">
-            Posted by {{doc.name}} at {{ doc.created_at.strftime("%H:%M on %d %B %Y") }}
-            <br/>
-            <a href="{{ url_for('edit',mongoid=doc._id)}}">Edit</a> | <a href="{{ url_for('delete',mongoid=doc._id)}}">Delete</a>
-            <br/>
-        </p>
-        <p>
-            {{ doc.message }}
-        </p>
-            
+  <div class="seven">
+    <h1>Your Workouts</h1>
+  </div>
+  <div class="main-cont"> 
+  {% for doc in docs %}
+    <hr class="solid" />
+    <div class="container-read">
+      <div class="row workout-item">
+        <span class="read-text">Date:</span> <span class="read-text-data">{{ doc.date }}</span>
+      </div>
+
+      <div class="actions">
+      <form action="{{ url_for('delete', mongoid=doc._id) }}" method="post" style="display: inline;">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit"><i class="fa-solid fa-xmark fa-xl"></i></button>
+      </form>
+      <a href="{{ url_for('edit', mongoid=doc._id) }}" class="edit-link">Edit</a>
     </div>
-    {%endfor%}
-</p>
+      {% for workout in doc.workouts %}
+        <br />
+        <div class="row workout-item">
+          <span class="read-text">Body Part:</span> <span class="read-text-data">{{ workout.body_part }}</span>
+        </div>
+
+        <div class="row workout-item">
+          <span class="read-text">Exercises:</span>
+          <div class="exercise-info">
+            {% for exercise in workout.exercises %}
+              <li class="read-text-data-name">{{ exercise.name }}</li>
+              <div>
+                {% for set in exercise.sets %}
+                  <div class="exercise-info-1">
+                    <span class="read-text-1">-> Reps:</span> <span class="read-text-data-1">{{ set.reps }}</span>
+                    <br />
+                    <span class="read-text-1">-> Weight:</span> <span class="read-text-data-1">{{ set.weight }}</span>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+  </div>
 {% endblock %}

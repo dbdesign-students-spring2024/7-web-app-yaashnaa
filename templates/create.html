@@ -1,15 +1,21 @@
-{% extends 'base.html' %} {% block container %}
-<h2>Create</h2>
-<p>Create a new record in the MongoDB database collection.</p>
-<form method="POST" action="{{ url_for('create_post') }}">
-  <p>Your name: <input type="text" id="fname" name="fname" /><br /></p>
-  <p>
-    Message:
-    <textarea type="text" id="fmessage" name="fmessage"></textarea>
-  </p>
-  <p>
-    <a href="{{ url_for('read')}}">Cancel</a>
-    <input type="submit" name="post-btn" value="Post" />
-  </p>
+{% extends 'base.html' %}
+{% block container %}
+
+<div class="seven">
+  <h1>Log a Workout</h1>
+</div>
+
+<div class="form-workout">
+<form method="POST" action="{{ url_for('create') }}">
+  <p>Date: <input type="date" id="date" name="date" /></p> <!-- Add the 'date' field -->
+  <p>Body part: <input type="text" id="body_part" name="body_part" /></p>
+  <p>Exercise: <input type="text" id="exercise" name="exercise" /></p>
+  <p>Reps <input type="text" id="reps" name="reps" /><br /></p>
+  <p>Weight: <input type="text" id="weight" name="weight" /><br /></p>
+  <div class="buttons">
+    <button class="button-78"><a href="{{ url_for('read')}}">Cancel</a> </button>
+    <button class="button-78"> <input type="submit" name="post-btn" value="Post" /> Post </button>
+  </div>
 </form>
+</div> 
 {% endblock %}
