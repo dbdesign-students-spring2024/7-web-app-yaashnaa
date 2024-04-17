@@ -1,69 +1,42 @@
 #!/usr/bin/env python3
-
 import os
 import sys
 import subprocess
 import datetime
-
-from flask import Flask, render_template, request, redirect, url_for, make_response
-
 import logging
 from logging.handlers import RotatingFileHandler
-
-# Setup logging
-
-
-import sentry_sdk
-from sentry_sdk.integrations.flask import (
-    FlaskIntegration,
-)  # delete this if not using sentry.io
-
-# from markupsafe import escape
 import pymongo
 from pymongo.errors import ConnectionFailure
 from bson.objectid import ObjectId
 from dotenv import load_dotenv
 
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, make_response, session
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 
-# load credentials and configuration options from .env file
-# if you do not yet have a file named .env, make one based on the template in env.example
-load_dotenv(override=True)  # take environment variables from .env.
+# Load credentials and configuration options from .env file
+load_dotenv(override=True)
 
-# initialize Sentry for help debugging... this requires an account on sentrio.io
-# you will need to set the SENTRY_DSN environment variable to the value provided by Sentry
-# delete this if not using sentry.io
-sentry_sdk.init(
-    dsn=os.getenv("SENTRY_DSN"),
-    # enable_tracing=True,  # If you need tracing, you can keep this option
-    traces_sample_rate=1.0,
-    integrations=[FlaskIntegration()],
-    send_default_pii=True,
-)
-
-# instantiate the app using sentry for debugging
+# Initialize the application
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = os.getenv('SECRET_KEY', 'default_secret_key')  # Use a default if not set
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-client = pymongo.MongoClient('mongodb://localhost:27017/')
-db = client['user_data']
+
+# Setup database connection once
+mongo_uri = os.getenv("MONGO_URI", 'mongodb://localhost:27017/')
+client = pymongo.MongoClient(mongo_uri)
+db = client[os.getenv("MONGO_DBNAME", 'user_data')]
+
 def setup_logging():
-    # Create a file handler object
     handler = RotatingFileHandler('flask_app.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.INFO)
-
-    # Create a logging format
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     handler.setFormatter(formatter)
-
-    # Add the handlers to the logger
     app.logger.addHandler(handler)
 
-# Call setup_logging in your main function or before starting the app
 setup_logging()
+
 class User(UserMixin):
     def __init__(self, username):
         self.username = username
@@ -71,11 +44,10 @@ class User(UserMixin):
     def get_id(self):
         return self.username
 
-
 @login_manager.user_loader
 def load_user(user_id):
     if user_id in db.list_collection_names():
-        user = User(user_id)  # Pass the username to the User object
+        user = User(user_id)
         return user
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -131,13 +103,10 @@ def dashboard():
 try:
     cxn = pymongo.MongoClient(os.getenv("MONGO_URI"))
     db = cxn[os.getenv("MONGO_DBNAME")]  # store a reference to the selected database
-
-
     cxn.admin.command("ping")  # The ping command is cheap and does not require auth.
     print(" * Connected to MongoDB!")  # if we get here, the connection worked!
 except ConnectionFailure as e:
     print(" * MongoDB connection error:", e)  # debug
-    sentry_sdk.capture_exception(e)  # send the error to sentry.io. delete if not using
     sys.exit(1)  # this is a catastrophic error, so no reason to continue to live
 
 
@@ -166,17 +135,16 @@ def home():
 def read():
     docs = db.workouts.find({}).sort("date", pymongo.DESCENDING)
     docs = list(db.workouts.find({}).sort("date", pymongo.DESCENDING))
-    app.logger.info(f"Documents fetched: {docs}")
     return render_template("read.html", docs=docs)
 
 
-# @app.route("/create")
-# def create():
-#     """
-#     Route for GET requests to the create page.
-#     Displays a form users can fill out to create a new document.
-#     """
-#     return render_template("create.html")  # render the create template
+@app.route("/create")
+def create():
+    """
+    Route for GET requests to the create page.
+    Displays a form users can fill out to create a new document.
+    """
+    return render_template("create.html")  # render the create template
 
 @app.route("/read_database")
 def read_database():
@@ -267,15 +235,14 @@ def edit_post(mongoid):
                 }
             )
 
-            app.logger.info("Update result:", result.raw_result)
+
 
             return redirect(url_for("read"))
     except Exception as e:
-        app.logger.error("Error in edit_post route:", exc_info=True)
         return str(e), 500
 
 
-from flask import request
+
 
 @app.route("/delete/<mongoid>", methods=["POST", "DELETE"])
 def delete(mongoid):
@@ -306,11 +273,10 @@ def webhook():
     # pull_output = str(pull_output).strip() # remove whitespace
     process = subprocess.Popen(["chmod", "a+x", "flask.cgi"], stdout=subprocess.PIPE)
     chmod_output = process.communicate()[0]
-    # send a success response
     response = make_response(f"output: {pull_output}", 200)
     response.mimetype = "text/plain"
-    return response
 
+    return response
 
 @app.errorhandler(Exception)
 def handle_error(e):
@@ -320,7 +286,6 @@ def handle_error(e):
     return render_template("error.html", error=e)  # render the edit template
 
 
-# run the app
 if __name__ == "__main__":
-    # logging.basicConfig(filename="./flask_error.log", level=logging.DEBUG)
+    logging.basicConfig(filename='error.log', level=logging.ERROR)
     app.run(load_dotenv=True)
